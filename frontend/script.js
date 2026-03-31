@@ -1,6 +1,6 @@
 // 🔥 BASE URL (IMPORTANT)
 // PC ke liye:
-const BASE_URL = "http://127.0.0.1:8000"; 
+const BASE_URL = "https://fake-spam-detection.onrender.com"; 
 // Jab aap deploy karenge, toh yaha deploy ki gayi URL daalein:
 // const BASE_URL = "https://your-backend-url.render.com";
 
