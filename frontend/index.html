@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fake News Detector</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="ph ph-shield-check"></i>
+            <span>TruthGuard AI</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchTab('home')" id="btn-home">
+                <i class="ph ph-magnifying-glass"></i> Analyze
+            </button>
+            <button class="nav-btn" onclick="switchTab('history')" id="btn-history">
+                <i class="ph ph-clock-counter-clockwise"></i> History
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Home / Analyzer Tab -->
+        <section id="home" class="tab-content active">
+            <div class="header-section">
+                <h1>Verify the Truth</h1>
+                <p>Paste the <b>News Heading</b> or any text below. Our upgraded AI model now detects misinformation with just the title.</p>
+            </div>
+
+            <div class="glass-card analyzer-card">
+                <div class="input-wrapper">
+                    <textarea id="newsInput" placeholder="Enter the news heading or content here..."></textarea>
+                    <div class="input-footer">
+                        <span id="charCount">0 characters</span>
+                        <button class="primary-btn" id="analyzeBtn" onclick="analyzeNews()">
+                            <i class="ph ph-sparkle"></i> Verify Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loader -->
+            <div id="loader" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing linguistic patterns...</p>
+            </div>
+
+            <!-- Result Box -->
+            <div id="resultBox" class="hidden">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- History Tab -->
+        <section id="history" class="tab-content hidden">
+            <div class="header-section">
+                <h1>Scan History</h1>
+                <p>Review previously analyzed articles and their authenticity scores.</p>
+            </div>
+
+            <div class="glass-card history-container">
+                <div id="historyList">
+                    <!-- Injected via JS -->
+                    <div class="empty-state">Loading history...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
