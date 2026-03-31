@@ -8,3 +8,4 @@ pandas
 nltk
 beautifulsoup4
 python-dotenv
+lxml
