@@ -29,10 +29,25 @@ app.add_middleware(
 )
 
 # MongoDB Setup
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://dhruvnarula1972_db_user:Dhruvaa%400000@cluster0.qk3maoy.mongodb.net/?appName=Cluster0")
-client = MongoClient(MONGODB_URI)
-db = client["fake_news_db"]
-collection = db["history"]
+MONGODB_URI = os.getenv("MONGODB_URI")
+
+if not MONGODB_URI:
+    # Use fallback if env is missing
+    MONGODB_URI = "mongodb+srv://dhruvnarula1972_db_user:Dhruvaa%400000@cluster0.qk3maoy.mongodb.net/?appName=Cluster0"
+
+try:
+    # Use direct connection settings if needed to bypass intermittent DNS SRV issues
+    client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+    # Test connection
+    client.admin.command('ping')
+    db = client["fake_news_db"]
+    collection = db["history"]
+    print("✅ Successfully connected to MongoDB Atlas")
+except Exception as e:
+    print(f"❌ MongoDB Connection Error: {e}")
+    # Handle the case where the application should still start or fail gracefully
+    db = None
+    collection = None
 
 model = pickle.load(open("model.pkl", "rb"))
 vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
@@ -69,15 +84,19 @@ def predict_news(news: NewsRequest):
         source_url = None
         source_name = None
 
-    # Update MongoDB
-    collection.insert_one({
-        "text": news.text,
-        "result": result,
-        "confidence": float(probability * 100),
-        "source_url": source_url,
-        "source_name": source_name,
-        "timestamp": datetime.now()
-    })
+    # Update MongoDB if connected
+    if collection is not None:
+        try:
+            collection.insert_one({
+                "text": news.text,
+                "result": result,
+                "confidence": float(probability * 100),
+                "source_url": source_url,
+                "source_name": source_name,
+                "timestamp": datetime.now()
+            })
+        except Exception as e:
+            print(f"Failed to insert into history: {e}")
 
     return {
         "result": result,
@@ -88,5 +107,7 @@ def predict_news(news: NewsRequest):
 
 @app.get("/history")
 def get_history():
+    if collection is None:
+        return []
     records = list(collection.find({}, {"_id": 0}))
     return records[::-1]
