@@ -21,7 +21,6 @@ class NewsRequest(BaseModel):
 
 history_data = []
 
-# Load model + vectorizer (trained on titles only)
 model = pickle.load(open("model.pkl", "rb"))
 vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
 
@@ -34,13 +33,11 @@ def clean_text(text):
 
 @app.post("/predict")
 def predict(data: NewsRequest):
-    # Clean the input exactly like training data
     cleaned = clean_text(data.text)
 
     vec = vectorizer.transform([cleaned])
     result = model.predict(vec)[0]
 
-    # Proper probability from LogisticRegression
     proba = model.predict_proba(vec)[0]
     confidence = round(max(proba) * 100, 2)
 

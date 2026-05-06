@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
+import axios from "axios";
 import {
   createNewsArticle,
   createAnalysisResult,
@@ -37,7 +38,30 @@ export const newsRouter = router({
         const articleId = (articleResult as any).insertId || 1;
 
         // Run NLP analysis
-        const prediction = predictNewsAuthenticity(input.content);
+        const localPrediction = predictNewsAuthenticity(input.content);
+        
+        let prediction = { ...localPrediction };
+
+        try {
+          const response = await axios.post("http://127.0.0.1:8000/predict", {
+            text: input.content
+          }, { timeout: 15000 });
+          const pyData = response.data;
+          
+          if (pyData) {
+            prediction.verdict = pyData.result.includes("FAKE") ? "FAKE" : "REAL";
+            prediction.confidence = pyData.confidence;
+            
+            prediction.processingSteps = {
+              ...prediction.processingSteps,
+              snippet: pyData.snippet,
+              sourceUrl: pyData.source_url,
+              sourceName: pyData.source_name
+            };
+          }
+        } catch (e) {
+          console.warn("Python backend error or unreachable, using local model.", e);
+        }
 
         // Create analysis result record
         const analysisResult = await createAnalysisResult({

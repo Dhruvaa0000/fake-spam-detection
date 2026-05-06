@@ -1,6 +1,5 @@
 import pandas as pd
 
-# 🔹 Diverse Real Indian News Patterns (100+ simulated samples)
 indian_true_expanded = [
     {"title": "Earlier this week, PM Modi, while speaking in Parliament, referred to the severe conditions that have emerged globally as a result of this war."},
     {"title": "PM Modi says we must remain prepared and united and how India faced similar challenges during the COVID crisis with unity."},
@@ -53,7 +52,6 @@ indian_true_expanded = [
     {"title": "Bollywood's latest blockbuster 'Pathaan' breaks previous box office records within 5 days."},
 ]
 
-# 🔹 Fake Indian News Patterns (More diverse)
 indian_fake_expanded = [
     {"title": "Shocking: PM Modi secretly signs agreement to hand over Kashmir to UN forces."},
     {"title": "Breaking News: All 2000 rupee notes to be banned again from tomorrow midnight."},
@@ -77,20 +75,15 @@ def augment_dataset(file_path, new_data):
         df = pd.read_csv(file_path)
         new_df = pd.DataFrame(new_data)
         
-        # Match columns with dummy data
         if 'subject' not in df.columns: df['subject'] = 'indian_news'
         if 'date' not in df.columns: df['date'] = '2026'
         
-        # Add necessary columns
         new_df['subject'] = 'indian_news'
         new_df['date'] = '2026'
         new_df['text'] = ""
         
-        # Ensure correct column order
         new_df = new_df[df.columns]
         
-        # To make a real impact, we repeat these samples 500 times
-        # This gives them enough weight to compete with the 40k+ ISOT rows
         repeated_df = pd.concat([new_df] * 500, ignore_index=True)
         
         combined_df = pd.concat([df, repeated_df], ignore_index=True)

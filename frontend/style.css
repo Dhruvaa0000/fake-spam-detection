@@ -1,12 +1,12 @@
 :root {
-    --bg-color: #0d0f17;
+    --bg-color: #1e253c;
     --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
+    --text-secondary: #cbd5e1;
     --accent-glow: #6366f1;
     --accent-secondary: #ec4899;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(255, 255, 255, 0.08);
-    
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.15);
+
     --success: #10b981;
     --danger: #ef4444;
 }
@@ -26,14 +26,13 @@ body {
     position: relative;
 }
 
-/* Background Gradients / Blobs */
 .blob-1 {
     position: absolute;
     top: -10%;
     left: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     z-index: -1;
     filter: blur(60px);
@@ -45,7 +44,7 @@ body {
     right: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(236,72,153,0.1) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     z-index: -1;
     filter: blur(60px);
@@ -57,7 +56,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 5%;
-    background: rgba(13, 15, 23, 0.6);
+    background: rgba(30, 37, 60, 0.7);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--card-border);
     position: sticky;
@@ -158,7 +157,7 @@ body {
 
 textarea {
     width: 100%;
-    min-height: 200px;
+    min-height: 140px;
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--card-border);
     border-radius: 12px;
@@ -186,9 +185,8 @@ textarea::placeholder {
     align-items: center;
 }
 
-#charCount {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+color: var(--text-secondary);
+font-size: 0.9rem;
 }
 
 .primary-btn {
@@ -223,16 +221,15 @@ textarea::placeholder {
 }
 
 /* Loader */
-#loader {
-    text-align: center;
-    margin-top: 30px;
-    animation: fadeIn 0.3s ease;
+text-align: center;
+margin-top: 30px;
+animation: fadeIn 0.3s ease;
 }
 
 .spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid rgba(255,255,255,0.1);
+    border: 4px solid rgba(255, 255, 255, 0.1);
     border-top: 4px solid var(--accent-glow);
     border-radius: 50%;
     margin: 0 auto 15px auto;
@@ -240,9 +237,8 @@ textarea::placeholder {
 }
 
 /* Result Box */
-#resultBox {
-    margin-top: 30px;
-    animation: slideUp 0.5s ease-out forwards;
+margin-top: 30px;
+animation: slideUp 0.5s ease-out forwards;
 }
 
 .result-card {
@@ -251,7 +247,7 @@ textarea::placeholder {
     justify-content: space-between;
     padding: 24px;
     border-radius: 16px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--card-border);
 }
 
@@ -275,16 +271,26 @@ textarea::placeholder {
     font-size: 2.5rem;
 }
 
-.fake .result-icon { color: var(--danger); }
-.real .result-icon { color: var(--success); }
+.fake .result-icon {
+    color: var(--danger);
+}
+
+.real .result-icon {
+    color: var(--success);
+}
 
 .result-text h2 {
     font-size: 1.8rem;
     margin-bottom: 5px;
 }
 
-.fake .result-text h2 { color: var(--danger); }
-.real .result-text h2 { color: var(--success); }
+.fake .result-text h2 {
+    color: var(--danger);
+}
+
+.real .result-text h2 {
+    color: var(--success);
+}
 
 .source-info {
     font-size: 0.95rem;
@@ -320,7 +326,7 @@ textarea::placeholder {
 .confidence-track {
     width: 100%;
     height: 8px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -331,8 +337,13 @@ textarea::placeholder {
     transition: width 1s ease-out;
 }
 
-.fake .confidence-fill { background: var(--danger); }
-.real .confidence-fill { background: var(--success); }
+.fake .confidence-fill {
+    background: var(--danger);
+}
+
+.real .confidence-fill {
+    background: var(--success);
+}
 
 /* History Section */
 .history-container {
@@ -343,11 +354,13 @@ textarea::placeholder {
 .history-container::-webkit-scrollbar {
     width: 8px;
 }
+
 .history-container::-webkit-scrollbar-track {
     background: transparent;
 }
+
 .history-container::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 4px;
 }
 
@@ -361,7 +374,7 @@ textarea::placeholder {
 }
 
 .history-item:hover {
-    background: rgba(255,255,255,0.02);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .history-item:last-child {
@@ -382,8 +395,13 @@ textarea::placeholder {
     font-size: 0.9rem;
 }
 
-.history-meta .fake { color: var(--danger); }
-.history-meta .real { color: var(--success); }
+.history-meta .fake {
+    color: var(--danger);
+}
+
+.history-meta .real {
+    color: var(--success);
+}
 
 .empty-state {
     text-align: center;
@@ -391,8 +409,10 @@ textarea::placeholder {
     padding: 40px 0;
 }
 
-/* Utilities */
-.hidden { display: none !important; }
+
+.hidden {
+    display: none !important;
+}
 
 .tab-content {
     display: none;
@@ -405,22 +425,42 @@ textarea::placeholder {
     opacity: 1;
 }
 
-/* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes spin {
-    100% { transform: rotate(360deg); }
+    100% {
+        transform: rotate(360deg);
+    }
 }

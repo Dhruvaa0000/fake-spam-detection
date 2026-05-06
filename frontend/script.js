@@ -1,11 +1,5 @@
-// 🔥 BASE URL (IMPORTANT)
-// PC ke liye:
-const BASE_URL = "https://fake-spam-detection.onrender.com"; 
-// Jab aap deploy karenge, toh yaha deploy ki gayi URL daalein:
-// const BASE_URL = "https://your-backend-url.render.com";
+const BASE_URL = "http://127.0.0.1:8000"; 
 
-// Mobile ke liye (agar phone pe chalana ho):
-// const BASE_URL = "http://192.168.29.164:8000";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -86,7 +80,7 @@ async function analyzeNews() {
 
         loader.classList.add("hidden");
 
-        const isFake = data.result === 'FAKE';
+        const isFake = data.result.includes('FAKE');
         const typeClass = isFake ? 'fake' : 'real';
         const displayResult = isFake ? 'Fake News Detected' : 'Reliable Source';
 
@@ -97,8 +91,10 @@ async function analyzeNews() {
                    <div class="result-text">
                         <h2>${displayResult}</h2>
                         ${data.source_url ? `
-                            <p class="source-info">
-                                Verified via: <a href="${data.source_url}" target="_blank" class="source-link">${data.source_name || 'Online Source'} 🔗</a>
+                            <p class="source-info">Verified via: <strong>${data.source_name || 'Online Source'}</strong></p>
+                            ${data.snippet ? `<div style="background: rgba(255,255,255,0.05); padding: 8px 10px; border-radius: 6px; margin: 8px 0; font-size: 0.85em; color: #bbb; border-left: 3px solid var(--accent); line-height: 1.3;"><em>"${data.snippet}"</em></div>` : ''}
+                            <p style="margin-top: 10px;">
+                                <a href="${data.source_url}" target="_blank" class="source-link" style="color: var(--accent); text-decoration: underline; font-weight: bold;">Click here for more info 🔗</a>
                             </p>
                         ` : '<p>Analyzed via AI Model</p>'}
                    </div>
@@ -149,14 +145,14 @@ async function loadHistory() {
         }
 
         data.reverse().forEach(item => {
-            const isFake = item.result === 'FAKE';
+            const isFake = item.result && item.result.includes('FAKE');
 
             historyList.innerHTML += `
                 <div class="history-item">
                     <p class="history-text">"${item.text || item.newsText}"</p>
                     <div class="history-meta">
                         <span class="${isFake ? 'fake' : 'real'}">${item.result} (${item.confidence}%)</span>
-                        ${item.source_url ? `<a href="${item.source_url}" target="_blank" class="source-link">Source 🔗</a>` : ''}
+                        ${item.source_url ? `<a href="${item.source_url}" target="_blank" class="source-link">Click here for more info 🔗</a>` : ''}
                     </div>
                 </div>
             `;

@@ -131,7 +131,7 @@ export default function DetectNews() {
                   value={newsContent}
                   onChange={(e) => setNewsContent(e.target.value)}
                   placeholder="Paste your news article here... (minimum 10 characters)"
-                  className="w-full h-64 p-4 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+                  className="w-full h-40 p-4 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent resize-none"
                 />
               </label>
               <div className="text-sm text-muted-foreground">

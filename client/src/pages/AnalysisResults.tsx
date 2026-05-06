@@ -139,6 +139,21 @@ export default function AnalysisResults() {
               {analysis.explanation}
             </p>
 
+            {analysis.processingSteps?.snippet && (
+              <div className="mt-6 p-4 bg-accent/10 border border-accent/20 rounded-lg max-w-2xl mx-auto text-left">
+                <h3 className="font-semibold mb-2 text-accent">Summary / Source Check</h3>
+                <p className="text-foreground mb-3 leading-relaxed">{analysis.processingSteps.snippet}</p>
+                {analysis.processingSteps?.sourceUrl && (
+                  <p className="text-sm border-t border-accent/20 pt-3">
+                    <span className="font-semibold text-muted-foreground mr-2">Verified via: </span>
+                    <a href={analysis.processingSteps.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 hover:underline inline-flex items-center gap-1">
+                      {analysis.processingSteps.sourceName || "View Source"}
+                    </a>
+                  </p>
+                )}
+              </div>
+            )}
+
             <div className="mt-8 flex gap-4 justify-center">
               <Button
                 onClick={() => navigate("/detect")}

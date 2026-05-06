@@ -1,7 +1,6 @@
 import pandas as pd
 import random
 
-# 🔹 Templates for generating realistic 2026 news (REAL)
 tpl_real = {
     "politics": [
         "PM Modi to chair high-level meeting on {topic} today in New Delhi.",
