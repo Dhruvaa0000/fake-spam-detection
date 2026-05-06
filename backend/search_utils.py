@@ -84,7 +84,7 @@ def verify_real_news(text, api_key):
             first_name = link.split('/')[2].replace('www.', '')
             first_snippet = item.get('snippet', '')
         
-        if similar(text[:100], title[:100]) > 0.65 or similar(text[:100], snippet[:150]) > 0.55:
+        if similar(text[:100], title[:100]) > 0.70 or similar(text[:100], snippet[:150]) > 0.65:
             return {
                 "source": link,
                 "source_name": link.split('/')[2].replace('www.', ''),
