@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+requests
+pymongo[srv]
+pydantic
+scikit-learn
+pandas
+nltk
+beautifulsoup4
+python-dotenv
+lxml
+dnspython

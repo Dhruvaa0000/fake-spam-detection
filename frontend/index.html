@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fake News Detector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="ph ph-shield-check"></i>
+            <span>TruthGuard AI</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchTab('home')" id="btn-home">
+                <i class="ph ph-magnifying-glass"></i> Analyze
+            </button>
+            <button class="nav-btn" onclick="switchTab('history')" id="btn-history">
+                <i class="ph ph-clock-counter-clockwise"></i> History
+            </button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="home" class="tab-content active">
+            <div class="header-section">
+                <h1>Fake News Detector</h1>
+                <p style="font-size: 1.15rem; margin-top: 15px;">Doubtful about a WhatsApp forward or a News Headline? Just paste it below and our AI will instantly check the internet for you!</p>
+            </div>
+
+            <div class="glass-card analyzer-card">
+                <div class="input-wrapper">
+                    <textarea id="newsInput" placeholder="Paste any news headline here... (e.g., 'PM Modi flags off new Vande Bharat train')"></textarea>
+                    <div class="input-footer">
+                        <span id="charCount">0 characters</span>
+                        <button class="primary-btn" id="analyzeBtn" onclick="analyzeNews()" style="padding: 14px 30px; font-size: 1.15rem;">
+                            <i class="ph ph-magnifying-glass"></i> Analyze News
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loader" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing linguistic patterns...</p>
+            </div>
+
+            <div id="resultBox" class="hidden">
+            </div>
+        </section>
+
+        <section id="history" class="tab-content hidden">
+            <div class="header-section">
+                <h1>Scan History</h1>
+                <p>Review previously analyzed articles and their authenticity scores.</p>
+            </div>
+
+            <div class="glass-card history-container">
+                <div id="historyList">
+                    <div class="empty-state">Loading history...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>
